@@ -1,0 +1,169 @@
+.colore {
+    background-color: #390099;
+}
+.svgLoading{
+display: flex;
+justify-content: center;
+align-self: center;
+}
+
+.svgLoading svg{
+    width: 300px;
+    height: 300px;
+}
+
+/*Navbar*/
+.discoteca-nome {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    font-weight: 900; 
+    color: #FF0054; 
+    
+}
+
+/* DetailPage */
+.CardContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 87em; /* distanza dal top */
+}
+
+.Card {   
+    margin: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(80, 80, 80, 0.1);
+    width: 1300px;
+}
+
+.Card-img-top {
+    width: 100%;
+    border-bottom: 1px solid #5e5e5e;
+}
+
+.CardBody {
+    padding: 2em;
+    background-color: #e8dbfd;
+}
+
+.CardTitle {
+    font-size: 2em;
+    font-weight: bold;
+    color: #FF0054;
+}
+
+.CardIncludedDishes,
+.CardData,
+.CardDrink,
+.CardTags,
+.CardApeIncl,
+.CardDresscode {
+    font-weight: bold;
+    margin-top: 1em;
+    color: #525151;
+}
+
+.btn-primary {
+    background-color: #FF0054;
+    color: #fefefe;
+    padding: 0.7em 1.5em;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 1.5em;
+}
+
+.btn-primary:hover {
+    background-color: #FF0054;
+}
+
+
+/* HomePage */
+.HomePage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.HomeStart{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.EventCard {
+    border-radius: 8px;
+    width: 600px;
+    margin: 10px;
+    padding-bottom: 30px;
+    box-shadow: 0 0 10px rgba(80, 80, 80, 0.1);
+}
+
+.EventCard img {
+    width: 100%;
+    height: auto;
+}
+
+.EventCardContent {
+    padding: 15px;
+    background-color: #e8dbfd;
+}
+
+.EventCardContent h6 {
+    color: #FF0054;
+    margin-bottom: 10px;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Overlay scuro per evidenziare il popup */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Assicura che l'overlay sia sopra gli altri elementi */
+}
+
+
+/*  POPUP */
+.popup {
+    background: #e8dbfd;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.popup button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #fb226b;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+.popup button:hover {
+    background-color: #9e0059;
+}/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .CardContainer {
+        height: 78em; /* distanza dal top */
+    }
+
+}
+@media screen and (min-width: 900px){
+    .Card-img-top {
+height: 650px;
+    }
+}
