@@ -6,7 +6,7 @@ import { useEvents } from "../hooks/useEvents"; // Importo il custom hook useEve
 const HomePage = () => { 
     const { events, isLoading } = useEvents();  // Destructuring per ottenere events e isLoading
     
-    // Se isLoading è true, mostra caricamento
+    // Se isLoading è true, mostra caricamento 
     if (isLoading) {
 
             return <div className="svgLoading"><svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
