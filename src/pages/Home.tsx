@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'; // Importo il componente Link
 import { useEvents } from "../hooks/useEvents"; // Importo il custom hook useEvents dal file
 
 
-const HomePage = () => { // Definizione del componente HomePage
+const HomePage = () => { 
     const { events, isLoading } = useEvents();  // Destructuring per ottenere events e isLoading
-
+    
+    // Se isLoading è true, mostra caricamento
     if (isLoading) {
-         // Se isLoading è true, mostra caricamento
+
             return <div className="svgLoading"><svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
             viewBox="0 0 100 100" enableBackground="new 0 0 0 0">
             <rect x="20" y="50" width="4" height="10" fill="#fff">
@@ -38,26 +39,39 @@ const HomePage = () => { // Definizione del componente HomePage
 <div className="navbar">
     {/* Titolo della discoteca */}
     <h1 className="discoteca-nome">QuantuM</h1>
-      {/* Logo della discoteca */}
+    
+    {/* Logo della discoteca */}
     <img src="../src/assets/logo.svg" alt="Logo" style={{ width: '150px' }}/>
+    
     {/* Link a un dettaglio dell'evento (in questo caso con id 3) */}
     <Link to="/detail/3" className="btn-primary">Evento del momento</Link>
 </div>
 
-    {/* <img src="..\src\assets\logo.svg" alt="" /> */}
         <div className="HomePage">
-             {/* Mappa attraverso gli eventi e crea una card per ciascun evento */}
+            {/* Mapp attraverso gli eventi e crea una card per ciascun evento */}
             {events.map((singleEvent, i) => ( 
-                <div className="EventCard" key={i}>
-                    <img src={singleEvent.coverImage} alt={singleEvent.name} /> {/* Mette immagine del evento e titolo alternativo */}
+                <div className="EventCard" key={i}> 
+                    
+                    {/* Mette immagine del evento e titolo alternativo */}
+                    <img src={singleEvent.coverImage} alt={singleEvent.name} />
 
                     <div className="EventCardContent">
-                        <div> <h6>Id Evento:  {singleEvent.id} </h6></div>  {/* Id dell'evento */}
-                        <h2>{singleEvent.name}</h2>   {/* Nome dell'evento */}
-                        <div>{singleEvent.date}</div> {/* Data e ora dell'evento */}
-                        <h6>{singleEvent.price} $</h6>{/* Prezzo dell'evento */}
+                        
+                        {/* Id dell'evento */}
+                        <div> <h6>Id Evento:  {singleEvent.id} </h6></div>  
+                        
+                        {/* Nome dell'evento */}
+                        <h2>{singleEvent.name}</h2>   
+                        
+                        {/* Data e ora dell'evento */}
+                        <div>{singleEvent.date}</div>
+                        
+                        {/* Prezzo dell'evento */}
+                        <h6>{singleEvent.price} $</h6>
+                        
                         {/* Descrizione breve dell'evento */}
                         <div>{singleEvent.description.short}</div>
+                        
                         {/* Link che porta alla pagina di dettaglio specifica dell'evento */}
                         <Link to={`/detail/${singleEvent.id}`} className="btn-primary">
                                 Voglio sapere di più

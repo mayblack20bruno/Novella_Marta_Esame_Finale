@@ -3,24 +3,27 @@ import './App.css'
 import Home from './pages/Home';
 import DetailPage from './pages/DetailPage';
 
+// Creazione di un oggetto router con percorsi e relativi componenti associati.
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Home /> /* avendo questo abbiamo una rotta   */
-        // {path: "*", element: <h1> 404 </h1>} --> serve in caso non venga trovata una pagina mostra l'errore 404  
+        element: <Home />
+        // {path: "*", element: <h1> 404 </h1>} potrebbe essere utilizzata per gestire la pagina 404. 
     },
     {
-        // serve quando non si ha nessuna rotta matchata e riporta alla home 
+        path: '/detail/:id', 
+        element: <DetailPage/>
+    },
+    {
+        
         path: "*",
         element: <Navigate to="/" />
-        /* fallback redirect o wildcard match--> valore di fallback è un valore in caso non venga matchato nulla fa quello  */
-    },
-    {
-        path: '/detail/:id', /* serve per fare pagina dettaglio id è n numero a caso  */
-        element: <DetailPage/>
+        // Se viene richiesta una rotta non esistente, reindirizza l'utente alla homepage ("/").
     }
+    
 ]);
 
+// Il componente principale dell'applicazione, che utilizza RouterProvider per fornire il router all'applicazione.
 function App() {
     return <RouterProvider router={router} />
 }

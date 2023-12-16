@@ -3,34 +3,33 @@ import { getEvent } from "../repo";
 import { EventDetailsType } from "../repo/tipeDetails";
 import { useParams } from "react-router-dom";
 
-
+// custom hook di React chiamata useEvent.
 export const useEvent = () => {
+    
+    // Inizializzazione di idNum a 1 come valore predefinito.
     let idNum:number= 1;
+    // Utilizzo di useParams per ottenere il parametro "id" dall'URL.
     const {id}=useParams<string>();
+    
+    // Se id è presente, converte il suo valore in un numero e lo assegna a idNum.
     if (id){idNum=parseInt(id)}; 
 
-
-    // Spazio di memoria in cui dichiarare se l'API
-    // sta caricando o meno. Inizialmente è true.
+     // useState viene utilizzato per gestire lo stato di caricamento.
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    // Spazio di memoria in cui caricare gli utenti ricevuti
-    // tramite API. Inizialmente è un array vuoto.
+    // useState viene utilizzato per gestire lo stato dei dettagli dell'evento.
     const [event, setEvent] = useState<EventDetailsType>();
-    // Il seguente useEffect carica la lista degli utenti
-    // all'avvio del componente (nessuna dipendenza specificata
-    // nell'array delle dipendenze).
+
+    // useEffect viene utilizzato per recuperare l'evento quando il componente viene montato.
     useEffect(() => {
-        // Chiamo l'API di caricamento utenti.
+        // Viene chiamata la funzione getEvent con l'idNum, che recupera dati sull'evento
         getEvent(idNum).then((event) => {
-            // Salvo la risposta (users: UserType[]) nello stato.
+            // L'evento viene impostato nello stato degli eventi.
             setEvent(event);
-            // Imposto isLoading a false perché il caricamento
-            // è terminato.
+            // Lo stato di caricamento viene impostato su false, indicando che i dati sono stati caricati.
             setIsLoading(false);
         });
     }, []);
 
-    // Ritorno un oggetto contenente le informazioni che servono
-    // alla vista.
+    // L'hook restituisce i dettagli dell'evento e lo stato di caricamento.
     return { event, isLoading };
 };

@@ -3,29 +3,27 @@ import { EventType } from "../repo/tipeEvents";
 import { getEvents } from "../repo";
 
 
-
+// Ho creato una custom hook chiamata useEvents.
 export const useEvents = () => {
-    // Spazio di memoria in cui dichiarare se l'API
-    // sta caricando o meno. Inizialmente è true.
+
+    // useState viene utilizzato per gestire lo stato di caricamento
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    // Spazio di memoria in cui caricare gli utenti ricevuti
-    // tramite API. Inizialmente è un array vuoto.
+
+     // useState viene utilizzato per gestire lo stato dei dati dell'evento,
     const [events, setEvents] = useState<EventType[]>([]);
-    // Il seguente useEffect carica la lista degli utenti
-    // all'avvio del componente (nessuna dipendenza specificata
-    // nell'array delle dipendenze).
+
+    // useEffect viene utilizzato per recuperare l'evento quando il componente viene montato.
     useEffect(() => {
-        // Chiamo l'API di caricamento utenti.
+
+        // Viene chiamata la funzione getEvent, che probabilmente recupera dati sull'evento in modo asincrono.
         getEvents().then((events) => {
-            // Salvo la risposta (users: UserType[]) nello stato.
+            // L'evento recuperato viene impostato nello stato dell'evento.
             setEvents(events);
-            // Imposto isLoading a false perché il caricamento
-            // è terminato.
+            // Lo stato di caricamento viene impostato su false, indicando che i dati sono stati caricati.
             setIsLoading(false);
         });
     }, []);
-
-    // Ritorno un oggetto contenente le informazioni che servono
-    // alla vista.
+    
+    // hook restituisce dati sull'evento e stato di caricamento
     return { events, isLoading };
 };
