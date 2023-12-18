@@ -1,164 +1,197 @@
 import "../App.css";
-import "../index.css"; // il file CSS principale
+import "../index.css";
 import { Link } from "react-router-dom"; // Importa componente Link da React Router per la navigazione
-import { useEvent } from "../hooks/useEvent"; // Importa hook personalizzato useEvent
-import { useState } from "react"; // Importa React e il suo hook useState
+import { useEvent } from "../hooks/useEvent";
+import { useState } from "react";
 
 const DetailPage = () => {
-const { event, isLoading } = useEvent(); // Utilizza l'hook useEvent per ottenere i dettagli dell'evento
-const [showPopup, setShowPopup] = useState(false); // Stato per gestire la visibilità del popup
-const [orarioPrenotato, setOrarioPrenotato] = useState<string | null>(null); // Stato per tracciare l'orario prenotato
+  const { event, isLoading } = useEvent(); // Utilizza l'hook useEvent per ottenere i dettagli dell'evento
+  const [showPopup, setShowPopup] = useState(false); // Ho utilizzato lo stato per gestire se un popup deve essere mostrato o nascosto.
+  const [orarioPrenotato, setOrarioPrenotato] = useState<string | null>(null); // Stato per tracciare l'orario prenotato
 
-// Definisco una funzione chiamata handlePrenota che accetta un parametro di tipo stringa chiamato orario
-const handlePrenota = (orario: string) => {
-    
+  // Definisco una funzione chiamata handlePrenota che accetta un parametro di tipo stringa chiamato orario
+  const handlePrenota = (orario: string) => {
     // Imposto il valore della variabile di stato orarioPrenotato con il valore fornito in orario
     setOrarioPrenotato(orario);
-    
+
     // Imposto il valore della variabile di stato showPopup a false
     setShowPopup(false);
-};
+  };
 
-// Se il caricamento è in corso, mostra un messaggio di caricamento
-if (isLoading) {
-    
-    return <div className="svgLoading"><svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-    viewBox="0 0 100 100" enableBackground="new 0 0 0 0">
-    <rect x="20" y="50" width="4" height="10" fill="#fff">
-        <animateTransform attributeType="xml"
-        attributeName="transform" type="translate"
-        values="0 0; 0 20; 0 0"
-        begin="0" dur="0.6s" repeatCount="indefinite" />
-    </rect>
-    <rect x="30" y="50" width="4" height="10" fill="#fff">
-        <animateTransform attributeType="xml"
-        attributeName="transform" type="translate"
-        values="0 0; 0 20; 0 0"
-        begin="0.2s" dur="0.6s" repeatCount="indefinite" />
-    </rect>
-    <rect x="40" y="50" width="4" height="10" fill="#fff">
-        <animateTransform attributeType="xml"
-        attributeName="transform" type="translate"
-        values="0 0; 0 20; 0 0"
-        begin="0.4s" dur="0.6s" repeatCount="indefinite" />
-    </rect>
-</svg>
-</div>;
-}
+  // Se il caricamento è in corso, mostra un loading di caricamento
+  if (isLoading) {
+    return (
+      <div className="svgLoading">
+        <svg
+          version="1.1"
+          id="L9"
+          xmlns="http://www.w3.org/2000/svg"
+          x="0px"
+          y="0px"
+          viewBox="0 0 100 100"
+          enableBackground="new 0 0 0 0"
+        >
+          <rect x="20" y="50" width="4" height="10" fill="#fff">
+            <animateTransform
+              attributeType="xml"
+              attributeName="transform"
+              type="translate"
+              values="0 0; 0 20; 0 0"
+              begin="0"
+              dur="0.6s"
+              repeatCount="indefinite"
+            />
+          </rect>
+          <rect x="30" y="50" width="4" height="10" fill="#fff">
+            <animateTransform
+              attributeType="xml"
+              attributeName="transform"
+              type="translate"
+              values="0 0; 0 20; 0 0"
+              begin="0.2s"
+              dur="0.6s"
+              repeatCount="indefinite"
+            />
+          </rect>
+          <rect x="40" y="50" width="4" height="10" fill="#fff">
+            <animateTransform
+              attributeType="xml"
+              attributeName="transform"
+              type="translate"
+              values="0 0; 0 20; 0 0"
+              begin="0.4s"
+              dur="0.6s"
+              repeatCount="indefinite"
+            />
+          </rect>
+        </svg>
+      </div>
+    );
+  }
 
-return (
+  return (
     <>
-
-    {/* Inizio della pagina */}
-    <div className="HomeStart">
+      {/* Inizio della pagina */}
+      
+      <div className="HomeStart">
+        
         <div className="navbar">
-        <h1 className="discoteca-nome">QuantuM</h1>
-        <img
+          <h1 className="discoteca-nome">QuantuM</h1>
+          <img
             src="../src/assets/logo.svg"
             alt="Logo"
             style={{ width: "150px" }}
-        />
+          />
 
-        {/* Link per tornare alla Home */}
-        <Link to="/" className="btn-primary">
+          {/* Link per tornare alla Home */}
+          <Link to="/" className="btn-primary">
             Home
-        </Link>
+          </Link>
         </div>
-    </div>
+      </div>
 
-    {/* Card dell'evento */}
-    <div className="CardContainer">
+      {/* Card dell'evento */}
+      <div className="CardContainer">
         <div className="Card">
-        <img
+          <img
             src={event?.coverImage}
             className="Card-img-top"
             alt="immagine evento"
-        />
+          />
 
-        <div className="CardBody">
-            
+          <div className="CardBody">
             {/* Titolo dell'evento */}
             <h5 className="CardTitle">{event?.name}</h5>
             <h6>Id Evento: {event?.id}</h6>
-            
+
             {/* Descrizione dell'evento */}
             <p className="CardDescrizione">
-            - {event?.description.long.join(" ")}{" "}
+              - {event?.description.long.join(" ")}{" "}
             </p>
-            
+
             {/* Data dell'evento */}
             <p className="CardData">- L'evento si svolgerà il {event?.date} </p>
-            
+
             {/* Drink inclusi */}
-            <p className="CardDrink">- Drink inclusi: {event?.includedDrinks.join(", ")}{" "}</p>
-            
+            <p className="CardDrink">
+              - Drink inclusi: {event?.includedDrinks.join(", ")}{" "}
+            </p>
+
             {/* Tags dell'evento */}
             <p className="CardTags">- I tag sono: {event?.tags.join(", ")} </p>
-            
+
             {/* Aperitivo incluso */}
-            <p className="CardApeIncl">- L'apertivio è incluso? {event?.isAperitivoIncluded.toString()}{" "}</p>
-            
+            <p className="CardApeIncl">
+              - L'apertivio è incluso? {event?.isAperitivoIncluded.toString()}{" "}
+            </p>
+
             {/* Dresscode dell'evento */}
-            <p className="CardDresscode">- Qaul'è il dresscode: {event?.dresscode}{" "} </p>
-            
+            <p className="CardDresscode">
+              - Qaul'è il dresscode: {event?.dresscode}{" "}
+            </p>
+
             {/* Prezzo dell'evento */}
             <h6>{event?.price} $</h6>
-            
-            {/* Mostra i piatti inclusi solo se sono inclusi */}
+
+            {/* verifica se la proprietà isAperitivoIncluded dell'oggetto event è vera (true) se è true fa vedere il cibo incluso */}
             {event?.isAperitivoIncluded && (
-            <div className="CardIncludedDishes">
+              <div className="CardIncludedDishes">
                 - Il cibo è incluso?{" "}
+                {/* mappa attraverso l'array di cibi inclusi nell'oggetto event, generando dinamicamente div per ciascun cibo incluso*/}
                 {event?.includedDishes.map((cibo, i) => {
-                return <div key={i} >Cibo incluso: {cibo.name};</div>;
+                  return <div key={i}>Cibo incluso: {cibo.name};</div>;
                 })}
-            </div>
+              </div>
             )}
             <div>
-                
-            {/* Pulsante per aprire il popup di prenotazione */}
-            <button
+              {/* Pulsante per aprire il popup di prenotazione */}
+              <button
                 onClick={() => setShowPopup(true)}
                 className="btn-primary"
-            > Prenota
-            </button>
+              >
+                {" "}
+                Prenota
+              </button>
 
-            {/* Visualizza l'orario prenotato */}
-            <h3>Hai prenotato l'orario: {orarioPrenotato}</h3>
+              {/* Visualizza l'orario prenotato */}
+              <h3>Hai prenotato l'orario: {orarioPrenotato}</h3>
             </div>
 
             {/* Link per tornare alla Home */}
             <Link to="/" className="btn-primary">
-            Torna alla Home
+              Torna alla Home
             </Link>
 
             {/* Mostra il popup se showPopup è true */}
             {showPopup && (
-            <div className="popup-overlay">
+              <div className="popup-overlay">
                 <div className="popup">
-                <h1>Prenota</h1>
-                <h2>Quale orario preferiresti?</h2>
+                  <h1>Prenota</h1>
+                  <h2>Quale orario preferiresti?</h2>
 
-                {/* Mostra gli orari disponibili per la prenotazione */}
-                {event?.slotTemporali.map((slotTemporale, index) => (
+                  {/* Mostra gli orari disponibili per la prenotazione */}
+                  {/* Mappa attraverso l'array di slotTemporali nell'oggetto event */}
+                  {event?.slotTemporali.map((slotTemporale, index) => (
                     <div key={index}>
-                    <button onClick={() => handlePrenota(slotTemporale)}>
+                      {/* Per ogni elemento, crea un div con un pulsante */}
+                      <button onClick={() => handlePrenota(slotTemporale)}>
                         {slotTemporale}
-                    </button>
+                      </button>
                     </div>
-                ))}
+                  ))}
 
-                {/* Pulsante per chiudere il popup */}
-                <div>
+                  {/* Pulsante per chiudere il popup */}
+                  <div>
                     <button onClick={() => setShowPopup(false)}>Chiudi</button>
+                  </div>
                 </div>
-                </div>
-            </div>
+              </div>
             )}
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
     </>
-);
+  );
 };
 
 export default DetailPage;

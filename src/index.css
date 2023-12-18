@@ -18,8 +18,14 @@ align-self: center;
     font-size: 48px;
     font-weight: 900; 
     color: #FF0054; 
+}
+
+.navbar{
+    background-color: rgba(198, 249, 248, 0.201);
     
 }
+
+
 
 /* DetailPage */
 .CardContainer {
@@ -85,6 +91,13 @@ align-self: center;
     margin: 20px;
 }
 
+.HomeStartDetail{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    
+}
 .HomeStart{
     display: flex;
     flex-wrap: wrap;
